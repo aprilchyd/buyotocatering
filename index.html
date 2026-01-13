@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bu Yoto Catering | Exquisite Light Dining</title>
+    
+    <!-- Fonts: Playfair Display (Serif) & Lato (Sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- RESET & VARIABLES (LIGHT THEME) --- */
+        :root {
+            --color-bg: #faf9f6; /* Off-white / Cream */
+            --color-bg-alt: #f4f1ea; /* Slightly darker beige for sections */
+            --color-gold: #bfa055; /* Champagne Gold (Darker for contrast on white) */
+            --color-gold-light: #d4c5a0;
+            --color-text-main: #2c2c2c; /* Dark Charcoal */
+            --color-text-muted: #666666;
+            --color-white: #ffffff;
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Lato', sans-serif;
+            --transition-slow: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+            --transition-fast: all 0.3s ease;
+            --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--color-bg);
+            color: var(--color-text-main);
+            font-family: var(--font-sans);
+            line-height: 1.8;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3, h4 {
+            font-family: var(--font-serif);
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            color: var(--color-text-main);
+        }
+
+        .text-gold {
+            color: var(--color-gold);
+        }
+
+        .section-title {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--color-text-main);
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--color-gold);
+            margin-bottom: 4rem;
+            font-weight: 700;
+        }
+
+        p {
+            font-weight: 300;
+            color: var(--color-text-muted);
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: var(--transition-slow);
+            background: linear-gradient(to bottom, rgba(250,249,246,0.9), transparent);
+        }
+
+        nav.scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 1rem 5%;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            color: var(--color-text-main);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            color: var(--color-text-main);
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            position: relative;
+            transition: var(--transition-fast);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--color-gold);
+            transition: var(--transition-fast);
+        }
+
+        .nav-links a:hover {
+            color: var(--color-gold);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .btn-nav {
+            border: 1px solid var(--color-gold);
+            padding: 0.5rem 1.5rem;
+            color: var(--color-gold);
+            background: transparent;
+        }
+
+        .btn-nav:hover {
+            background: var(--color-gold);
+            color: var(--color-white);
+        }
+
+        /* --- HERO SECTION (Light & Airy) --- */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background-color: #fff;
+        }
+
+        /* Light Cinematic Background */
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://picsum.photos/seed/luxuryfoodwhite/1920/1080.jpg') no-repeat center center/cover;
+            opacity: 0.9; /* Bright, no heavy dark overlay */
+            animation: kenburns 20s infinite alternate linear;
+            z-index: -1;
+        }
+        
+        /* Subtle overlay to ensure text readability */
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(45deg, rgba(255,255,255,0.8), rgba(255,255,255,0.4));
+            z-index: 0;
+        }
+
+        @keyframes kenburns {
+            from { transform: scale(1); }
+            to { transform: scale(1.15); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 800px;
+            padding: 0 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1.5s ease-out forwards 0.5s;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            color: var(--color-text-main);
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-divider {
+            width: 100px;
+            height: 1px;
+            background-color: var(--color-gold);
+            margin: 0 auto 2rem auto;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background-color: var(--color-text-main); /* Dark button for contrast */
+            color: var(--color-white);
+            padding: 1rem 2.5rem;
+            font-family: var(--font-sans);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-size: 0.8rem;
+            text-decoration: none;
+            transition: var(--transition-fast);
+            border: 1px solid var(--color-text-main);
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-gold);
+            border-color: var(--color-gold);
+            color: var(--color-white);
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--color-text-main);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            animation: bounce 2s infinite;
+        }
+
+        /* --- SECTIONS GENERAL --- */
+        section {
+            padding: 6rem 10%;
+        }
+
+        section:nth-child(even) {
+            background-color: var(--color-bg-alt);
+        }
+
+        /* --- STORY SECTION --- */
+        .story-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .story-text {
+            font-size: 1.2rem;
+            color: var(--color-text-muted);
+        }
+
+        .signature {
+            font-family: 'Mrs Saint Delafield', cursive; /* Fallback to cursive */
+            font-size: 2.5rem;
+            color: var(--color-gold);
+            margin-top: 2rem;
+            font-style: italic;
+        }
+
+        /* --- SERVICES (BESPOKE) --- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .service-card {
+            background: var(--color-white);
+            border: 1px solid rgba(0,0,0,0.05);
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: var(--transition-slow);
+            box-shadow: var(--shadow-card);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--color-gold);
+        }
+
+        .service-icon {
+            font-size: 2rem;
+            color: var(--color-gold);
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .service-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--color-text-main);
+        }
+
+        .service-desc {
+            font-size: 0.95rem;
+            color: var(--color-text-muted);
+        }
+
+        /* --- MENU (SIGNATURE COLLECTION) --- */
+        .menu-list {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            padding-bottom: 1rem;
+        }
+
+        .menu-details {
+            flex: 1;
+            padding-right: 2rem;
+        }
+
+        .menu-name {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            color: var(--color-text-main);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .menu-ingredients {
+            font-style: italic;
+            font-size: 0.9rem;
+            color: var(--color-text-muted);
+        }
+
+        .menu-price {
+            font-family: var(--font-sans);
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--color-gold);
+            white-space: nowrap;
+            font-weight: 700;
+        }
+
+        /* --- PORTFOLIO (THE GALAS) --- */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            height: 300px;
+            cursor: pointer;
+        }
+
+        .portfolio-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1.2s ease;
+        }
+
+        .portfolio-item:hover .portfolio-img {
+            transform: scale(1.1);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem;
+            background: linear-gradient(to top, rgba(255,255,255,0.95), transparent);
+            transform: translateY(20px);
+            opacity: 0;
+            transition: var(--transition-slow);
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .portfolio-title {
+            color: var(--color-text-main);
+            font-size: 1.2rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .portfolio-loc {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-gold);
+        }
+
+        /* --- ATELIER & MAP --- */
+        .atelier-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            box-shadow: var(--shadow-card);
+        }
+
+        .atelier-info {
+            padding: 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: var(--color-white);
+        }
+
+        .atelier-map {
+            height: 100%;
+            min-height: 400px;
+            position: relative;
+            background-color: #eee;
+        }
+
+        /* Map styling for light theme */
+        .atelier-map iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            filter: grayscale(20%); /* Subtle grayscale, no inversion */
+        }
+
+        /* --- TESTIMONIALS --- */
+        .testimonial-slider {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .quote-icon {
+            font-size: 3rem;
+            color: var(--color-gold-light);
+            font-family: serif;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .testimonial-text {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            color: var(--color-text-main);
+        }
+
+        .testimonial-author {
+            color: var(--color-gold);
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        /* --- INQUIRY / CONCIERGE --- */
+        .inquiry-section {
+            background: var(--color-bg-alt);
+            text-align: center;
+        }
+
+        .concierge-box {
+            background: var(--color-white);
+            padding: 4rem;
+            max-width: 600px;
+            margin: 0 auto;
+            border: 1px solid rgba(191, 160, 85, 0.3);
+            box-shadow: var(--shadow-card);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-control {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid #ccc;
+            padding: 1rem 0;
+            color: var(--color-text-main);
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            transition: var(--transition-fast);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-bottom-color: var(--color-gold);
+        }
+
+        .form-control::placeholder {
+            color: #aaa;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--color-white);
+            padding: 3rem 5%;
+            text-align: center;
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .social-links {
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links a {
+            color: var(--color-text-main);
+            margin: 0 10px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: var(--transition-fast);
+        }
+        
+        .social-links a:hover {
+            color: var(--color-gold);
+        }
+
+        .copyright {
+            font-size: 0.8rem;
+            color: #999;
+        }
+
+        /* --- ANIMATION UTILS --- */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0) translateX(-50%);}
+            40% {transform: translateY(-10px) translateX(-50%);}
+            60% {transform: translateY(-5px) translateX(-50%);}
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- MODAL / TOAST (Darker to pop) --- */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--color-text-main); /* Dark background for contrast */
+            color: var(--color-white);
+            padding: 1rem 2rem;
+            font-weight: bold;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: var(--transition-fast);
+            z-index: 2000;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.5rem; }
+            .section-title { font-size: 2.2rem; }
+            
+            nav {
+                padding: 1rem;
+                background-color: rgba(255,255,255,0.95);
+            }
+
+            .nav-links { display: none; } /* Simplified for mobile demo */
+            
+            .atelier-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .atelier-map {
+                min-height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigasi -->
+    <nav id="navbar">
+        <a href="#" class="logo">Bu Yoto<span class="text-gold">.</span></a>
+        <div class="nav-links">
+            <a href="#story">Story</a>
+            <a href="#services">Services</a>
+            <a href="#menu">Collection</a>
+            <a href="#portfolio">Gala</a>
+            <a href="#atelier">Atelier</a>
+            <a href="#inquiry" class="btn-nav">Concierge</a>
+        </div>
+        <!-- Mobile Menu Toggle could go here -->
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Keanggunan Rasa dalam<br>Setiap Momen Berharga</h1>
+            <div class="hero-divider"></div>
+            <p style="font-size: 1.1rem; letter-spacing: 0.05em; margin-bottom: 2rem; color: var(--color-text-main);">
+                Perpaduan seni kuliner modern dengan kehangatan tradisi.
+            </p>
+            <a href="#inquiry" class="btn-primary">Request Private Consultation</a>
+        </div>
+        <div class="scroll-down">Discover</div>
+    </section>
+
+    <!-- Story Section -->
+    <section id="story">
+        <div class="story-container reveal">
+            <h2 class="section-title">The Story of Bu Yoto</h2>
+            <div class="section-subtitle">A Legacy of Taste</div>
+            <p class="story-text">
+                Berawal dari resep keluarga warisan sang nenek, Bu Yoto Catering mengubah bumbu dapur tradisional menjadi seni kuliner modern. Kami tidak sekadar menyajikan makanan; kami mengkurasi pengalaman. Setiap hidangan disiapkan dengan presisi, estetika *fine dining*, dan dedikasi untuk menghormati momen paling berharga dalam hidup Anda.
+            </p>
+            <div class="signature">Bu Yoto</div>
+        </div>
+    </section>
+
+    <!-- Services (Bespoke) -->
+    <section id="services">
+        <div class="reveal">
+            <h2 class="section-title">Bespoke Services</h2>
+            <div class="section-subtitle">Curated Exclusively for You</div>
+        </div>
+        
+        <div class="services-grid reveal">
+            <!-- Service 1 -->
+            <div class="service-card">
+                <span class="service-icon">✦</span>
+                <h3 class="service-title">Private Dining</h3>
+                <p class="service-desc">
+                    Layanan Chef pribadi yang datang ke rumah Anda. Sebuah jamuan eksklusif dengan menu *degustation* yang disajikan secara langsung di meja makan Anda.
+                </p>
+            </div>
+            
+            <!-- Service 2 -->
+            <div class="service-card">
+                <span class="service-icon">✦</span>
+                <h3 class="service-title">Grand Wedding Curations</h3>
+                <p class="service-desc">
+                    Konsep pernikahan impian dengan menu Internasional atau Nusantara modifikasi. Kami memastikan sajian kami setara kemegahan dekorasi venue Anda.
+                </p>
+            </div>
+            
+            <!-- Service 3 -->
+            <div class="service-card">
+                <span class="service-icon">✦</span>
+                <h3 class="service-title">Corporate Gala</h3>
+                <p class="service-desc">
+                    Untuk acara korporat kelas atas yang membutuhkan presisi, kecepatan, dan rasa yang luar biasa. Layanan *buffet* ataupun *seated dinner* dengan etiket profesional.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu">
+        <div class="reveal">
+            <h2 class="section-title">The Signature Collection</h2>
+            <div class="section-subtitle">Taste of Excellence</div>
+        </div>
+
+        <div class="menu-list reveal">
+            <!-- Menu Item 1 -->
+            <div class="menu-item">
+                <div class="menu-details">
+                    <span class="menu-name">Wagyu Beef Rendang Rosemary</span>
+                    <span class="menu-ingredients">Daging Wagyu A5 pilihan, dimasak lambat dengan rempah organik khas Minang dan sentuhan rosemary segar.</span>
+                </div>
+                <div class="menu-price">Upon Request</div>
+            </div>
+
+            <!-- Menu Item 2 -->
+            <div class="menu-item">
+                <div class="menu-details">
+                    <span class="menu-name">Golden Saffron Lobster Thermidor</span>
+                    <span class="menu-ingredients">Lobster hidup dari Jimbaran, disajikan dengan saus krim beraroma Saffron Iran dan keju Gruyère panggang.</span>
+                </div>
+                <div class="menu-price">Upon Request</div>
+            </div>
+
+            <!-- Menu Item 3 -->
+            <div class="menu-item">
+                <div class="menu-details">
+                    <span class="menu-name">Truffle Infused Gudeg</span>
+                    <span class="menu-ingredients">Interpretasi modern masakan Jogja. Nangka muda empuk dengan minyak truffle hitam dan ayam kampung organik.</span>
+                </div>
+                <div class="menu-price">Upon Request</div>
+            </div>
+
+            <!-- Menu Item 4 -->
+            <div class="menu-item">
+                <div class="menu-details">
+                    <span class="menu-name">Imperial Bird's Nest Soup</span>
+                    <span class="menu-ingredients">Sarang burung walet asli berkualitas premium, direbus dengan kaldu ayam selama 8 jam untuk kesehatan dan kemewahan.</span>
+                </div>
+                <div class="menu-price">Upon Request</div>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="#inquiry" class="btn-primary">Discuss Custom Menu</a>
+        </div>
+    </section>
+
+    <!-- Portfolio (The Galas) -->
+    <section id="portfolio">
+        <div class="reveal">
+            <h2 class="section-title">The Galas</h2>
+            <div class="section-subtitle">Our Masterpieces</div>
+        </div>
+
+        <div class="portfolio-grid reveal">
+            <div class="portfolio-item">
+                <img src="https://picsum.photos/seed/wedding1/600/600.jpg" alt="Wedding Table Setting" class="portfolio-img">
+                <div class="portfolio-overlay">
+                    <h3 class="portfolio-title">The Royal Wedding</h3>
+                    <p class="portfolio-loc">Hotel Mulia, Jakarta</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <img src="https://picsum.photos/seed/foodart/600/600.jpg" alt="Fine Dining Plating" class="portfolio-img">
+                <div class="portfolio-overlay">
+                    <h3 class="portfolio-title">Ambrosia Dinner</h3>
+                    <p class="portfolio-loc">Private Villa, Ubud</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <img src="https://picsum.photos/seed/gala/600/600.jpg" alt="Corporate Gala" class="portfolio-img">
+                <div class="portfolio-overlay">
+                    <h3 class="portfolio-title">Fortune 500 Gala</h3>
+                    <p class="portfolio-loc">Convention Center, Surabaya</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" style="background-color: var(--color-bg);">
+        <div class="testimonial-slider reveal">
+            <span class="quote-icon">“</span>
+            <p class="testimonial-text">
+                "Saya tidak pernah melihat penyajian seindah ini. Bu Yoto Catering mengubah pernikahan anak saya menjadi sebuah pesta gastronomi yang tak terlupakan. Sangat elegan."
+            </p>
+            <p class="testimonial-author">— Ibu Hartini, Pengusaha Tekstil</p>
+        </div>
+    </section>
+
+    <!-- Atelier / Map -->
+    <section id="atelier">
+        <div class="atelier-container">
+            <div class="atelier-info reveal">
+                <h2 class="section-title" style="text-align: left; margin-bottom: 2rem;">Our Atelier</h2>
+                <p style="margin-bottom: 1rem;">Kami mengundang Anda untuk mengunjungi dapur uji coba pribadi kami guna mencicipi menu (Food Tasting) berdasarkan janji temu.</p>
+                <p style="margin-bottom: 2rem;">
+                    <strong>Bu Yoto Private Kitchen</strong><br>
+                    Jl. Senopati No. 88, Kebayoran Baru<br>
+                    Jakarta Selatan, 12190
+                </p>
+                <a href="#inquiry" class="btn-primary">Book a Tasting</a>
+            </div>
+            <div class="atelier-map reveal">
+                <!-- Google Maps Embed - Light Theme Filter -->
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126907.02935255278!2d106.732988!3d-6.284283!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f1ec2422b423%3A0x2cd044543e54e42e!2sJakarta%20Selatan%2C%20Kota%20Jakarta%20Selatan%2C%20Daerah%20Khusus%20Ibukota%20Jakarta!5e0!3m2!1sid!2sid!4v1634567890123!5m2!1sid!2sid" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Inquiry / Concierge -->
+    <section id="inquiry" class="inquiry-section">
+        <div class="concierge-box reveal">
+            <h2 class="section-title">Speak to our Concierge</h2>
+            <p style="margin-bottom: 2rem;">Silakan isi formulir di bawah ini untuk penjadwalan konsultasi privat.</p>
+            
+            <form id="consultationForm">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Nama Lengkap" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Nomor Telepon WhatsApp" required>
+                </div>
+                <div class="form-group">
+                    <select class="form-control" style="color: var(--color-text-main);">
+                        <option value="" disabled selected>Jenis Acara</option>
+                        <option value="Pernikahan">Pernikahan (Wedding)</option>
+                        <option value="Gala">Corporate Gala</option>
+                        <option value="Dinner">Private Dining</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Rencana Tanggal Acara" onfocus="(this.type='date')" onblur="(this.type='text')">
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%; margin-top: 1rem;">Request Consultation</button>
+            </form>
+
+            <div style="margin-top: 2rem; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 1.5rem;">
+                <p style="font-size: 0.9rem; color: #888; margin-bottom: 1rem;">Atau hubungi kami secara langsung</p>
+                <a id="wa-vip-btn" href="#" class="text-gold" style="font-size: 1.1rem; border-bottom: 1px solid var(--color-gold); padding-bottom: 5px; text-decoration: none;">
+                    Contact our Concierge via WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="social-links">
+            <a href="#">Instagram</a>
+            <a href="#">Facebook</a>
+            <a href="#">Pinterest</a>
+        </div>
+        <p class="copyright">&copy; 2023 Bu Yoto Catering. All Rights Reserved. Designed for Excellence.</p>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        Permintaan terkirim. Tim Concierge kami akan segera menghubungi Anda.
+    </div>
+
+    <script>
+        // 1. SCROLL ANIMATION (Reveal on Scroll)
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealOnScroll = () => {
+            const windowHeight = window.innerHeight;
+            const elementVisible = 150;
+
+            revealElements.forEach((reveal) => {
+                const elementTop = reveal.getBoundingClientRect().top;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveal.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        // Trigger once on load
+        revealOnScroll();
+
+        // 2. NAVBAR BACKGROUND ON SCROLL
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // 3. WHATSAPP VIP INTEGRATION
+        const waBtn = document.getElementById('wa-vip-btn');
+        const phoneNumber = "6281234567890"; // Ganti dengan nomor asli
+        const message = "Selamat siang, Bu Yoto Catering. Saya ingin menjadwalkan konsultasi pribadi untuk rencana acara saya. Mohon informasi ketersediaan waktu untuk berdiskusi.";
+        
+        waBtn.href = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+        // 4. FORM SUBMISSION HANDLING (Simulation)
+        const form = document.getElementById('consultationForm');
+        const toast = document.getElementById('toast');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Simulate loading/sending state
+            const btn = form.querySelector('button');
+            const originalText = btn.innerText;
+            btn.innerText = "Processing...";
+            btn.style.opacity = "0.7";
+
+            setTimeout(() => {
+                // Show Toast
+                toast.classList.add('show');
+                
+                // Reset Form
+                form.reset();
+                btn.innerText = originalText;
+                btn.style.opacity = "1";
+
+                // Hide Toast after 3 seconds
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 4000);
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
